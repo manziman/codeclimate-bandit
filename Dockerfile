@@ -7,6 +7,8 @@ RUN pip3 install bandit
 
 SHELL [ "/bin/bash" ]
 
+USER root
+
 VOLUME /code
 
 WORKDIR /code

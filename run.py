@@ -16,7 +16,7 @@ def print_json(data):
 
 if __name__ == '__main__':
     # read json data from file
-    json_data = open("/results.json").read()
+    json_data = open("/scripts/results.json").read()
 
     # load to dict
     data = json.loads(json_data)
