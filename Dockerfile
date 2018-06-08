@@ -11,6 +11,7 @@ VOLUME /code
 
 WORKDIR /code
 COPY ./run.sh /scripts/run.sh
+COPY ./run.py /scripts/run.py
 
 COPY config.json /config.json
 
