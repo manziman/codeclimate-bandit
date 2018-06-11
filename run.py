@@ -30,8 +30,25 @@ def print_json():
 
 
 if __name__ == '__main__':
-    # read json data from file
-    # json_data = open("/scripts/results.json").read()
+    """Example bandit output:
+
+        "results": [
+            {
+            "code": "4 def location_generated_num(host_network_num):\n5     ran_host_num = randint(1, 255)\n6     return \"\".join([str(host_network_num), str(ran_host_num)])\n",
+            "filename": "./db_dir/custom_data.py",
+            "issue_confidence": "HIGH",
+            "issue_severity": "LOW",
+            "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+            "line_number": 5,
+            "line_range": [
+                5
+            ],
+            "test_id": "B311",
+            "test_name": "blacklist"
+            },
+            ...
+    """
+
 
     # load to dict
     # data = json.loads(sys.argv[1])
