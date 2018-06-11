@@ -1,35 +1,40 @@
 import json
+import sys
 
 
-def print_json():
+def print_json(result):
+    """Format bandit to codeclimate issue and print
+
+    Take a bandit issue and format to a codecliamte
+    issue. Then print.
+    
+    Arguments:
+        result {dict} -- a bandit result.
+    """
+    path = "/".join(result["filename"].split("/")[2:])
+
     issue = {
-        'type': 'issue',
-        'check_name': 'Unused Variable',
-        'categories': ['Style'],
-        'description': 'Unused local variable foo',
-        'remediation_points': 50000,
-        'location': {
-            'path': 'db_dir/project_db.py',
-            'positions': {
-                'begin': {
-                    'line': 13,
-                    'column': 1
-                },
-                'end': {
-                    'line': 14,
-                    'column': 5
-                }
+        "type": "issue",
+        "check_name": result["test_name"],
+        "categories": ["Style"],
+        "description": result["issue_text"],
+        "remediation_points": 50000,
+        "location": {
+            "path": path,
+            "lines": {
+                "begin": result["line_range"][0],
+                "end": result["line_range"][-1]
             }
         },
-        'content': {
-            'body': 'This is a markdown snippet'
+        "content": {
+            "body": result["code"]
         }
     }
 
-    print(json.dumps(issue) + '\0')
+    print(json.dumps(issue) + "\0")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     """Example bandit output:
 
         "results": [
@@ -48,10 +53,7 @@ if __name__ == '__main__':
             },
             ...
     """
+    data = json.loads(sys.argv[1])
 
-
-    # load to dict
-    # data = json.loads(sys.argv[1])
-    # testing
-
-    print_json()
+    for result in data["results"]:
+        print_json(result)
